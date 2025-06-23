@@ -1,3 +1,4 @@
 export function add(input: string): number {
-    return 0; // initial implementation (Red step)
+    const numbers = input.split(',').map(Number);
+    return numbers.reduce((acc, num) => acc + num, 0);
   }

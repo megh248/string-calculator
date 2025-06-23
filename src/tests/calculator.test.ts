@@ -1,9 +1,13 @@
-import { add } from "./../calculator";
+import { add } from "../calculator";
 
-describe("String Calculator", () => {
-  it("returns 0 for an empty string", () => {
-    expect(add("")).toBe(0);
-  });
-
-  // Add next test here: it("returns 1 for input '1'", ...)
+it("returns 0 for an empty string", () => {
+  expect(add("")).toBe(0);
 });
+
+it("returns the number for a single number", () => {
+  expect(add("1")).toBe(1);
+});
+
+it("returns the sum of two numbers", () => {
+    expect(add("1, 5")).toBe(6);
+  });
