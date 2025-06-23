@@ -20,6 +20,12 @@ export function add(input: string): number {
     // Convert the string to an array of numbers
     const numbers = numbersSection.split(splitRegex).map(Number);
 
+    // Check for negative numbers
+    const negatives = numbers.filter(num => num < 0);
+    if (negatives.length > 0) {
+        throw new Error(`negative numbers not allowed ${negatives.join(",")}`);
+    }
+
     // Return the sum of the numbers
     return numbers.reduce((acc, num) => acc + num, 0);
 }
