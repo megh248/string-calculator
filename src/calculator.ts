@@ -26,6 +26,12 @@ export function add(input: string): number {
         throw new Error(`negative numbers not allowed ${negatives.join(",")}`);
     }
 
+    // Check if numbers are greater than 1000
+    const over1000 = numbers.filter(num => num > 1000);
+    if (over1000.length > 0) {
+        throw new Error("numbers cannot be greater than 1000");
+    }
+
     // Return the sum of the numbers
     return numbers.reduce((acc, num) => acc + num, 0);
 }
