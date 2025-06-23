@@ -21,6 +21,10 @@ it("Handles custom delimiters", () => {
     expect(add("//;\n1;5")).toBe(6);
 });
 
+it("Handles delimiters of any length", () => {
+    expect(add("//[***]\n1***2***3")).toBe(6);
+});
+
 it("Throws on negative numbers with message", () => {
     expect(() => add("-1,2")).toThrow("negative numbers not allowed -1");
     expect(() => add("2,-4,3,-5")).toThrow("negative numbers not allowed -4,-5");

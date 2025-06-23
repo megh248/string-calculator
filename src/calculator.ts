@@ -7,16 +7,24 @@ export function add(input: string): number {
 
     // Check for custom delimiter
     if (input.startsWith('//')) {
-        const delimiterMatch = input.match(/^\/\/(.+)\n/);
-        if (delimiterMatch) {
-            delimiters = [delimiterMatch[1]];
-            numbersSection = input.slice(delimiterMatch[0].length);
+        // Support for delimiters of any length: //[delimiter]\n
+        const bracketedDelimiterMatch = input.match(/^\/\/\[(.+)\]\n/);
+        if (bracketedDelimiterMatch) {
+            delimiters = [bracketedDelimiterMatch[1]];
+            numbersSection = input.slice(bracketedDelimiterMatch[0].length);
+        } else {
+            // Single character delimiter
+            const delimiterMatch = input.match(/^\/\/(.+)\n/);
+            if (delimiterMatch) {
+                delimiters = [delimiterMatch[1]];
+                numbersSection = input.slice(delimiterMatch[0].length);
+            }
         }
     }
 
-    // Regular expression to split the string using any of the delimiters
-    const splitRegex = new RegExp(`[${delimiters.map(d => d.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&")).join("")}]`);
-    
+    // Build regex for splitting (support multi-char delimiters)
+    const splitRegex = new RegExp(delimiters.map(d => d.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&")).join("|"));
+
     // Convert the string to an array of numbers
     const numbers = numbersSection.split(splitRegex).map(Number);
 
