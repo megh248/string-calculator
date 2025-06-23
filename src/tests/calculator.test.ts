@@ -11,3 +11,7 @@ it("returns the number for a single number", () => {
 it("returns the sum of two numbers", () => {
     expect(add("1, 5")).toBe(6);
   });
+
+  it("Handles new lines between numbers", () => {
+    expect(add("1\n5")).toBe(6);
+  })
